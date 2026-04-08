@@ -6,7 +6,17 @@ export class Point {
 			[ x ],
 			[ y ],
 			[ z ]
-		])
+		]);
+	}
+
+	x() {
+		return this.mat.at(0, 0);
+	}
+	y() {
+		return this.mat.at(1, 0);
+	}
+	z() {
+		return this.mat.at(2, 0);
 	}
 
 	clone() {
@@ -81,9 +91,9 @@ export class Point {
 		}
 
 		this
-			.rotX(point.z)
-			.rotY(point.y)
-			.rotZ(point.x);
+			.rotX(point.z())
+			.rotY(point.y())
+			.rotZ(point.x());
 
 		return this;
 	}
