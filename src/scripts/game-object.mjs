@@ -78,9 +78,9 @@ export class Point {
 		}
 
 		this.mat = new Matrix([
-			[ Math.cos(angle), 0, -Math.sin(angle) ],
-			[ Math.sin(angle), 0,  Math.cos(angle) ],
-			[               0, 0,                1 ]
+			[ Math.cos(angle), -Math.sin(angle), 0 ],
+			[ Math.sin(angle),  Math.cos(angle), 0 ],
+			[               0,                0, 1 ]
 		]).multiply(this.mat);
 
 		return this;
