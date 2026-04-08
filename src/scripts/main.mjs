@@ -22,7 +22,7 @@ class Game {
 
 	#loop() {
 		const current_frame = performance.now();
-		const delta_time = current_frame - this.previous_frame;
+		const delta_time = (current_frame - this.previous_frame) / 1000;
 
 		this.update(delta_time);
 		this.render();
