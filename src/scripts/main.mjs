@@ -210,7 +210,11 @@ async function main() {
 
 	fetch("../objects/suzanne.obj")
 		.then((res) => res.text())
-		.then((data) => gameobjects.push(wavefront_to_gameobject(data)))
+		.then((data) => {
+			const suzanne = wavefront_to_gameobject(data);
+			suzanne.move(5, 5, 0);
+			gameobjects.push(suzanne);
+		})
 		.catch((err) => console.error("Could not load wavefront object:", err));
 
 	const ctx = canvas.getContext("2d");
