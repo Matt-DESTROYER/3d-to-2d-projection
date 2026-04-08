@@ -66,7 +66,7 @@ export class Matrix {
 
 		if (other instanceof Matrix) {
 			if (this.rows !== other.rows || this.columns !== other.columns) {
-				throw new Error("These matrices' shapes are not able to be added");
+				throw new Error("These matrices' shapes are not able to be subtracted");
 			}
 
 			for (let i = 0; i < this.rows; i++) {
