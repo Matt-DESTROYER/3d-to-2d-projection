@@ -12,17 +12,17 @@ function resize() {
 
 //function update() {}
 
-function render(ctx, gameobjects) {
+function render(ctx, camera, gameobjects) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	for (const gameobject of gameobjects) {
-		gameobject.render(ctx, camera);
+		gameobject.render(ctx, camera, FOV);
 	}
 }
 
 function game_loop(camera, gameobjects) {
 	//update();
-	render(ctx, gameobjects, FOV);
+	render(ctx, camera, gameobjects);
 
 	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
 }
