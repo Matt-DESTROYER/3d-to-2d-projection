@@ -56,7 +56,7 @@ class Game {
 		}
 
 		// rotate cube
-		this.gameobjects[0].rotate(delta_time, 0, 0);
+		this.gameobjects[0].rotate(0, delta_time, 0);
 	}
 	render() {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
