@@ -51,6 +51,8 @@ class Game {
 		if (this.input.down) {
 			this.camera.y(this.camera.y() - 0.05 * delta_time);
 		}
+
+		console.log(this.camera);
 	}
 	render() {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
