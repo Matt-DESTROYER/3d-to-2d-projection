@@ -1,4 +1,5 @@
 import { Point, GameObject } from "./game-object.mjs"
+import { wavefront_to_gameobject } from "./wavefront-object.mjs"
 
 const canvas = document.createElement("canvas");
 
@@ -206,6 +207,11 @@ async function main() {
 		[3, 7]
 	]);
 	gameobjects.push(cube);
+
+	fetch("../objects/suzanne.obj")
+		.then((res) => res.text())
+		.then((data) => gameobjects.push(wavefront_to_gameobject(data)))
+		.catch((err) => console.error("Could not load wavefront object:", err));
 
 	const ctx = canvas.getContext("2d");
 
