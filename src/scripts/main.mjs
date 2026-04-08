@@ -39,35 +39,35 @@ class Game {
 		const movement_distance = CAM_SPEED * delta_time;
 
 		if (this.input.move_forward) {
-			this.camera.move(0, 0, distance);
+			this.camera.move(0, 0, movement_distance);
 		}
 		if (this.input.move_backward) {
-			this.camera.move(0, 0, -distance);
+			this.camera.move(0, 0, -movement_distance);
 		}
 		if (this.input.move_right) {
-			this.camera.move(distance, 0, 0);
+			this.camera.move(movement_distance, 0, 0);
 		}
 		if (this.input.move_left) {
-			this.camera.move(-distance, 0, 0);
+			this.camera.move(-movement_distance, 0, 0);
 		}
 		if (this.input.move_down) {
-			this.camera.y(this.camera.y() + CAM_SPEED * delta_time);
+			this.camera.y(this.camera.y() + movement_distance);
 		}
 		if (this.input.move_up) {
-			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
+			this.camera.y(this.camera.y() - movement_distance);
 		}
 
 		if (this.input.rotate_up) {
-			this.camera.rotate(CAM_SPEED * delta_time, 0, 0);
+			this.camera.rotate(movement_distance, 0, 0);
 		}
 		if (this.input.rotate_down) {
-			this.camera.rotate(-CAM_SPEED * delta_time, 0, 0);
+			this.camera.rotate(-movement_distance, 0, 0);
 		}
 		if (this.input.rotate_left) {
-			this.camera.rotate(0, CAM_SPEED * delta_time, 0);
+			this.camera.rotate(0, movement_distance, 0);
 		}
 		if (this.input.rotate_right) {
-			this.camera.rotate(0, -CAM_SPEED * delta_time, 0);
+			this.camera.rotate(0, -movement_distance, 0);
 		}
 
 		// rotate cube
