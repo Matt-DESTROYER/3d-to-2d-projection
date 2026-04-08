@@ -3,6 +3,7 @@ import { Point, GameObject } from "./game-object.mjs"
 const canvas = document.createElement("canvas");
 
 const FOV = 90;
+const CAM_SPEED = 0.00001;
 
 function resize() {
 	canvas.width = window.innerWidth;
@@ -34,22 +35,22 @@ class Game {
 
 	update(delta_time) {
 		if (this.input.forward) {
-			this.camera.z(this.camera.x() + 0.00001 * delta_time);
+			this.camera.z(this.camera.x() + CAM_SPEED * delta_time);
 		}
 		if (this.input.backward) {
-			this.camera.z(this.camera.x() - 0.00001 * delta_time);
+			this.camera.z(this.camera.x() - CAM_SPEED * delta_time);
 		}
 		if (this.input.left) {
-			this.camera.x(this.camera.z() + 0.00001 * delta_time);
+			this.camera.x(this.camera.z() + CAM_SPEED * delta_time);
 		}
 		if (this.input.right) {
-			this.camera.x(this.camera.z() - 0.00001 * delta_time);
+			this.camera.x(this.camera.z() - CAM_SPEED * delta_time);
 		}
 		if (this.input.up) {
-			this.camera.y(this.camera.y() + 0.00001 * delta_time);
+			this.camera.y(this.camera.y() + CAM_SPEED * delta_time);
 		}
 		if (this.input.down) {
-			this.camera.y(this.camera.y() - 0.00001 * delta_time);
+			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
 		}
 	}
 	render() {
