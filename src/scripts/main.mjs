@@ -27,7 +27,7 @@ function game_loop() {
 function main() {
 	resize();
 	window.addEventListener("resize", resize);
-	document.appendChild(canvas);
+	document.body.appendChild(canvas);
 
 	window.requestAnimationFrame(game_loop);
 }
