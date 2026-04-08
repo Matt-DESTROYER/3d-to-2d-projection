@@ -2,10 +2,11 @@ import { Matrix } from "./matrix.mjs"
 
 export class Point {
 	constructor(x, y, z) {
-		this.mat = new Matrix(3, 1);
-		this.mat.set(0, 0, x);
-		this.mat.set(1, 0, y);
-		this.mat.set(2, 0, z);
+		this.mat = new Matrix([
+			[ x ],
+			[ y ],
+			[ z ]
+		])
 	}
 
 	clone() {
@@ -40,7 +41,7 @@ export class Point {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat = new Matrix(3, 1, [
+		this.mat = new Matrix([
 			[ 1,               0,                0 ],
 			[ 0, Math.cos(angle), -Math.sin(angle) ],
 			[ 0, Math.sin(angle),  Math.cos(angle) ]
@@ -53,7 +54,7 @@ export class Point {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat = new Matrix(3, 1, [
+		this.mat = new Matrix([
 			[ Math.cos(angle), 0, -Math.sin(angle) ],
 			[               0, 1,                0 ],
 			[ Math.sin(angle), 0,  Math.cos(angle) ]
@@ -66,7 +67,7 @@ export class Point {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat = new Matrix(3, 1, [
+		this.mat = new Matrix([
 			[ Math.cos(angle), 0, -Math.sin(angle) ],
 			[ Math.sin(angle), 0,  Math.cos(angle) ],
 			[               0, 0,                1 ]
