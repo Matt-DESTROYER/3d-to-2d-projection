@@ -40,10 +40,10 @@ class Game {
 		if (this.input.backward) {
 			this.camera.z(this.camera.z() - CAM_SPEED * delta_time);
 		}
-		if (this.input.left) {
+		if (this.input.right) {
 			this.camera.x(this.camera.x() + CAM_SPEED * delta_time);
 		}
-		if (this.input.right) {
+		if (this.input.left) {
 			this.camera.x(this.camera.x() - CAM_SPEED * delta_time);
 		}
 		if (this.input.up) {
