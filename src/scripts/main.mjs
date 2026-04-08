@@ -35,6 +35,7 @@ class Game {
 	}
 
 	update(delta_time) {
+		// input
 		if (this.input.forward) {
 			this.camera.z(this.camera.z() + CAM_SPEED * delta_time);
 		}
@@ -53,6 +54,9 @@ class Game {
 		if (this.input.up) {
 			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
 		}
+
+		// rotate cube
+		this.gameobjects[0].rotate(delta_time, 0, 0);
 	}
 	render() {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
