@@ -164,6 +164,10 @@ export class GameObject {
 			from_pos.translate(neg_cam_pos).rot(neg_cam_rot);
 			to_pos.translate(neg_cam_pos).rot(neg_cam_rot);
 
+			if (from_pos.z() <= 0 || to_pos.z() <= 0) {
+				continue;
+			}
+
 			let screen_x_from = (from_pos.x() / from_pos.z()) * fov + cx;
 			let screen_y_from = (from_pos.y() / from_pos.z()) * fov + cy;
 			let screen_x_to = (to_pos.x() / to_pos.z()) * fov + cx;
