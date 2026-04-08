@@ -55,8 +55,8 @@ class Game {
 	render() {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-		for (const gameobject of gameobjects) {
-			gameobject.render(this.ctx, camera, FOV);
+		for (const gameobject of this.gameobjects) {
+			gameobject.render(this.ctx, this.camera, FOV);
 		}
 	}
 }
