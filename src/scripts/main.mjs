@@ -48,7 +48,7 @@ async function main() {
 		[4, 5],
 		[5, 6],
 		[6, 7],
-		[7, 5],
+		[7, 4],
 		// connections
 		[0, 4],
 		[1, 5],
