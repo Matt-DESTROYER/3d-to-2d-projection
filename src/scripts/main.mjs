@@ -55,17 +55,17 @@ class Game {
 			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
 		}
 
-		if (this.rotate_up) {
-			this.camera.rotate(CAM_SPEED * delta_time, 0);
+		if (this.input.rotate_up) {
+			this.camera.rotate(CAM_SPEED * delta_time, 0, 0);
 		}
-		if (this.rotate_down) {
-			this.camera.rotate(-CAM_SPEED * delta_time, 0);
+		if (this.input.rotate_down) {
+			this.camera.rotate(-CAM_SPEED * delta_time, 0, 0);
 		}
-		if (this.rotate_left) {
-			this.camera.rotate(0, CAM_SPEED * delta_time, 0);
+		if (this.input.rotate_left) {
+			this.camera.rotate(0, CAM_SPEED * delta_time, 0, 0);
 		}
-		if (this.rotate_right) {
-			this.camera.rotate(0, -CAM_SPEED * delta_time, 0);
+		if (this.input.rotate_right) {
+			this.camera.rotate(0, -CAM_SPEED * delta_time, 0, 0);
 		}
 
 		// rotate cube
