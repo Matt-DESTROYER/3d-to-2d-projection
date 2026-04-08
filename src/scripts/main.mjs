@@ -34,16 +34,16 @@ class Game {
 
 	update(delta_time) {
 		if (this.input.forward) {
-			this.camera.x(this.camera.x() + 0.00005 * delta_time);
+			this.camera.z(this.camera.x() + 0.00005 * delta_time);
 		}
 		if (this.input.backward) {
-			this.camera.x(this.camera.x() - 0.00005 * delta_time);
+			this.camera.z(this.camera.x() - 0.00005 * delta_time);
 		}
 		if (this.input.left) {
-			this.camera.z(this.camera.z() + 0.00005 * delta_time);
+			this.camera.x(this.camera.z() + 0.00005 * delta_time);
 		}
 		if (this.input.right) {
-			this.camera.z(this.camera.z() - 0.00005 * delta_time);
+			this.camera.x(this.camera.z() - 0.00005 * delta_time);
 		}
 		if (this.input.up) {
 			this.camera.y(this.camera.y() + 0.00005 * delta_time);
