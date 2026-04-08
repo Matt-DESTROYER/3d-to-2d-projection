@@ -10,13 +10,17 @@ function resize() {
 
 //function update() {}
 
-function render() {
+function render(ctx, gameobjects) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	for (const gameobject of gameobjects) {
+		gameobject.render(ctx);
+	}
 }
 
 function game_loop(camera, gameobjects) {
 	//update();
-	render();
+	render(ctx, gameobjects);
 
 	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
 }
@@ -61,7 +65,7 @@ async function main() {
 }
 
 if (document.readyState === "loading") {
-	main();
-} else {
 	document.addEventListener("DOMContentLoaded", main, { once: true });
+} else {
+	main();
 }
