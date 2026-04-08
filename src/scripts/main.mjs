@@ -213,7 +213,8 @@ async function main() {
 		.then((res) => res.text())
 		.then((data) => {
 			const suzanne = wavefront_to_gameobject(data);
-			suzanne.move(5, 5, 0);
+			suzanne.move(0, 0, 5);
+			suzanne.rotate(0, 180 * Math.PI, 0);
 			gameobjects.push(suzanne);
 		})
 		.catch((err) => console.error("Could not load wavefront object:", err));
