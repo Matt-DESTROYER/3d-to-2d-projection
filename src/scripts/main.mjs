@@ -1,4 +1,7 @@
-import { GameObject } from "./game-object.mjs"
+import { Point, GameObject } from "./game-object.mjs"
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
 
 function resize() {
 	canvas.width = window.innerWidth;
@@ -11,21 +14,17 @@ function render() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function game_loop(ctx, camera, gameobjects) {
+function game_loop(camera, gameobjects) {
 	//update();
 	render();
 
-	window.requestAnimationFrame(() => game_loop(ctx, camera, gameobjects));
+	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
 }
 
 async function main() {
-	const canvas = document.createElement("canvas");
-
 	resize();
 	window.addEventListener("resize", resize);
 	document.body.appendChild(canvas);
-
-	const ctx = canvas.getContext("2d");
 	
 	const camera = new GameObject(new Point(0, 0, 0), [], []);
 	const gameobjects = [];
@@ -41,24 +40,24 @@ async function main() {
 		new Point(1, 1, -1)
 	], [
 		// top square
+		[0, 1],
 		[1, 2],
 		[2, 3],
-		[3, 4],
-		[4, 1],
+		[3, 0],
 		// bottom square
+		[4, 5],
 		[5, 6],
 		[6, 7],
-		[7, 8],
-		[8, 5],
+		[7, 5],
 		// connections
+		[0, 4],
 		[1, 5],
 		[2, 6],
-		[3, 7],
-		[4, 8]
+		[3, 7]
 	]);
 	gameobjects.push(cube);
 
-	window.requestAnimationFrame(() => game_loop(ctx, camera, gameobjects));
+	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
 }
 
 if (document.readyState === "loading") {

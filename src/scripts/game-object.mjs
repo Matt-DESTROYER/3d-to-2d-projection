@@ -128,14 +128,14 @@ export class GameObject {
 			throw new TypeError("Expected argument `z` to be of type `number`");
 		}
 
-		this.rot.x += x;
-		this.rot.y += y;
-		this.rot.z += z;
+		this.rot.mat.set(0, 0, this.rot.x() + x);
+		this.rot.mat.set(1, 0, this.rot.y() + y);
+		this.rot.mat.set(2, 0, this.rot.z() + z);
 
 		return this;
 	}
 
-	render(ctx, camera) {
+	render(ctx, camera, fov = 90) {
 		if (!(ctx instanceof CanvasRenderingContext2D)) {
 			throw new TypeError("Expected argument `ctx` to be of type `CanvasRenderingContext2D`");
 		}
@@ -143,15 +143,36 @@ export class GameObject {
 			throw new TypeError("Expected argument `camera` to be of type `GameObject`");
 		}
 
-		let pos = this.pos.clone();
-		let neg_cam = camera.pos.clone().negate();
-		pos.translate(neg_cam);
-		pos.multiply(
-			pos
-				.clone()
-				.rot(neg_cam)
-		);
+		let neg_cam_pos = camera.pos.clone().negate();
+		let neg_cam_rot = camera.rot.clone().negate();
 
+		ctx.strokeStyle = "#000000"
+		ctx.lineWidth = 2;
+		ctx.lineJoin = "miter";
 
+		let cx = ctx.canvas.width / 2;
+		let cy = ctx.canvas.height / 2;
+
+		ctx.beginPath();
+		for (const [from, to] of this.edges) {
+			let from_pos = transformed_pos.clone();
+			let to_pos = transformed_pos.clone();
+
+			from_pos.rot(this.rot).translate(this.pos);
+			to_pos.rot(this.rot).transformed_pos(this.pos);
+
+			from_pos.translate(neg_cam_pos).rot(neg_cam_rot);
+			to_pos.translate(neg_cam_pos).rot(neg_cam_rot);
+
+			let screen_x_from = (from_pos.x() / from_pos.z()) * fov + cx;
+			let screen_y_from = (from_pos.y() / from_pos.z()) * fov + cy;
+			let screen_x_to = (to_pos.x() / to_pos.z()) * fov + cx;
+			let screen_y_to = (to_pos.y() / to_pos.z() * fov + cy);
+
+			ctx.moveTo(screen_x_from, screen_y_from);
+			ctx.lineTo(screen_x_to, screen_y_to);
+		}
+		ctx.stroke();
+		ctx.closePath();
 	}
 }
