@@ -36,22 +36,22 @@ class Game {
 
 	update(delta_time) {
 		// input
-		if (this.input.forward) {
+		if (this.input.move_forward) {
 			this.camera.z(this.camera.z() + CAM_SPEED * delta_time);
 		}
-		if (this.input.backward) {
+		if (this.input.move_backward) {
 			this.camera.z(this.camera.z() - CAM_SPEED * delta_time);
 		}
-		if (this.input.right) {
+		if (this.input.move_right) {
 			this.camera.x(this.camera.x() + CAM_SPEED * delta_time);
 		}
-		if (this.input.left) {
+		if (this.input.move_left) {
 			this.camera.x(this.camera.x() - CAM_SPEED * delta_time);
 		}
-		if (this.input.down) {
+		if (this.input.move_down) {
 			this.camera.y(this.camera.y() + CAM_SPEED * delta_time);
 		}
-		if (this.input.up) {
+		if (this.input.move_up) {
 			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
 		}
 
@@ -62,10 +62,10 @@ class Game {
 			this.camera.rotate(-CAM_SPEED * delta_time, 0, 0);
 		}
 		if (this.input.rotate_left) {
-			this.camera.rotate(0, CAM_SPEED * delta_time, 0, 0);
+			this.camera.rotate(0, CAM_SPEED * delta_time, 0);
 		}
 		if (this.input.rotate_right) {
-			this.camera.rotate(0, -CAM_SPEED * delta_time, 0, 0);
+			this.camera.rotate(0, -CAM_SPEED * delta_time, 0);
 		}
 
 		// rotate cube
