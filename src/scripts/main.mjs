@@ -156,7 +156,7 @@ async function main() {
 
 	const ctx = canvas.getContext("2d");
 
-	const game = new Game(ctx, input, camera, gameobjects);
+	const game = new Game(input, camera, gameobjects, ctx);
 
 	game.start();
 }
