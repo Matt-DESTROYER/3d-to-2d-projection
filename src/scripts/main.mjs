@@ -213,7 +213,7 @@ async function main() {
 		.then((res) => res.text())
 		.then((data) => {
 			const suzanne = wavefront_to_gameobject(data);
-			suzanne.move(0, 5, 0);
+			suzanne.move(5, 0, 0);
 			//suzanne.rotate(0, 0, Math.PI / 180);
 			gameobjects.push(suzanne);
 		})
