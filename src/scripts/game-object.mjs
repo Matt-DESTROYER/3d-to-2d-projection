@@ -93,7 +93,7 @@ export class GameObject {
 		if (!(pos instanceof Point)) {
 			throw new TypeError("Expected argument `pos` to be of type `Point`");
 		}
-		if (!Array.isArray(points)) {
+		if (!Array.isArray(vertices)) {
 			throw new TypeError("Expected argument `vertices` to be of type `Array<Point>`");
 		}
 		if (!Array.isArray(edges)) {
@@ -133,7 +133,7 @@ export class GameObject {
 		}
 
 		let pos = this.pos.clone();
-		let neg_cam = camera.clone().negate();
+		let neg_cam = camera.pos.clone().negate();
 		pos.translate(neg_cam);
 		pos.multiply(
 			pos
