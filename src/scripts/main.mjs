@@ -7,8 +7,8 @@ const ctx = canvas.getContext("2d");
 const camera = new Matrix(3, 1);
 
 function resize() {
-	canvas.width = window.width;
-	canvas.height = window.height;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 }
 
 //function update() {}
