@@ -123,10 +123,10 @@ async function main() {
 				break;
 		}
 	});
-	
+
 	const camera = new GameObject(new Point(0, 0, 0), [], []);
 	const gameobjects = [];
-	
+
 	const cube = new GameObject(new Point(0, 0, 5), [
 		new Point(-1, -1, -1),
 		new Point(-1, -1, 1),
