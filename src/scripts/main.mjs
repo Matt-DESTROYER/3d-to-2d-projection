@@ -208,7 +208,7 @@ async function main() {
 	]);
 	gameobjects.push(cube);
 
-	fetch("../objects/suzanne.obj")
+	fetch("./objects/suzanne.obj")
 		.then((res) => res.ok ? res : Promise.reject("Request was not ok..."))
 		.then((res) => res.text())
 		.then((data) => {
