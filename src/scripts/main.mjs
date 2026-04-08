@@ -43,7 +43,7 @@ class Game {
 			this.camera.z(this.camera.z() + 0.00005 * delta_time);
 		}
 		if (this.input.right) {
-			this.camera.z(this.camera.z() + 0.00005 * delta_time);
+			this.camera.z(this.camera.z() - 0.00005 * delta_time);
 		}
 		if (this.input.up) {
 			this.camera.y(this.camera.y() + 0.00005 * delta_time);
