@@ -3,7 +3,7 @@ import { Point, GameObject } from "./game-object.mjs"
 const canvas = document.createElement("canvas");
 
 const FOV = 90;
-const CAM_SPEED = 0.00001;
+const CAM_SPEED = 2;
 
 function resize() {
 	canvas.width = window.innerWidth;
@@ -27,6 +27,7 @@ class Game {
 		this.update(delta_time);
 		this.render();
 
+		this.previous_frame = performance.now();
 		window.requestAnimationFrame(() => this.#loop());
 	}
 	start() {
@@ -56,8 +57,11 @@ class Game {
 	render() {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
+		const fov_radians = FOV * (Math.PI / 180);
+		const focal_length = (Math.min(canvas_height, canvas.width) / 2) / Math.tan(fov_radians / 2);
+
 		for (const gameobject of this.gameobjects) {
-			gameobject.render(this.ctx, this.camera, FOV);
+			gameobject.render(this.ctx, this.camera, focal_length);
 		}
 	}
 }
