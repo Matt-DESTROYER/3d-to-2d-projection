@@ -10,27 +10,118 @@ function resize() {
 	canvas.height = window.innerHeight;
 }
 
-//function update() {}
+class Game {
+	constructor(input, camera, gameobjects) {
+		this.previous_frame = null;
 
-function render(ctx, camera, gameobjects) {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-	for (const gameobject of gameobjects) {
-		gameobject.render(ctx, camera, FOV);
+		this.input = input;
+		this.camera = camera;
+		this.gameobjects = gameobjects;
 	}
-}
 
-function game_loop(camera, gameobjects) {
-	//update();
-	render(ctx, camera, gameobjects);
+	#loop() {
+		const current_frame = performance.now();
+		const delta_time = current_frame - this.previous_frame;
 
-	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
+		this.update();
+		this.render();
+
+		window.requestAnimationFrame(this.#loop);
+	}
+	start() {
+		window.requestAnimationFrame(this.#loop);
+	}
+
+	update() {
+		if (this.input.forward) {
+			this.camera.x(this.camera.x() + 0.5 * delta_time);
+		}
+		if (this.input.backward) {
+			this.camera.x(this.camera.x() - 0.5 * delta_time);
+		}
+		if (this.input.left) {
+			this.camera.z(this.camera.z() + 0.5 * delta_time);
+		}
+		if (this.input.right) {
+			this.camera.z(this.camera.z() + 0.5 * delta_time);
+		}
+		if (this.input.up) {
+			this.camera.y(this.camera.y() + 0.5 * delta_time);
+		}
+		if (this.input.down) {
+			this.camera.y(this.camera.y() - 0.5 * delta_time);
+		}
+	}
+	render(ctx) {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		for (const gameobject of gameobjects) {
+			gameobject.render(ctx, camera, FOV);
+		}
+	}
 }
 
 async function main() {
 	resize();
 	window.addEventListener("resize", resize);
 	document.body.appendChild(canvas);
+
+	const input = Object.seal({
+		forward: false,
+		backward: false,
+		left: false,
+		right: false,
+		up: false,
+		down: false
+	});
+	window.addEventListener("keydown", (event) => {
+		switch (event.code) {
+			case "KeyW":
+				input.forward = true;
+				break;
+			case "KeyS":
+				input.backward = true;
+				break;
+			case "KeyA":
+				input.left = true;
+				break;
+			case "KeyD":
+				input.right = true;
+				break;
+			case "KeyE":
+			case "Space":
+				input.up = true;
+				break;
+			case "KeyQ":
+			case "ShiftLeft":
+				input.down = true;
+				break;
+		}
+	});
+	window.addEventListener("keyup", (event) => {
+		switch (event.code) {
+			case "KeyW":
+				input.forward = false;
+				break;
+			case "KeyS":
+				input.backward = false;
+				break;
+			case "KeyA":
+				input.left = false;
+				break;
+			case "KeyD":
+				input.right = false;
+				break;
+			case "KeyE":
+			case "Space":
+				input.up = false;
+				break;
+			case "KeyQ":
+			case "ShiftLeft":
+				input.down = false;
+				break;
+		}
+	});
 	
 	const camera = new GameObject(new Point(0, 0, 0), [], []);
 	const gameobjects = [];
@@ -63,7 +154,9 @@ async function main() {
 	]);
 	gameobjects.push(cube);
 
-	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
+	const game = new Game(input, camera, gameobjects);
+
+	game.start();
 }
 
 if (document.readyState === "loading") {

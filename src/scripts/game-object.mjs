@@ -9,13 +9,22 @@ export class Point {
 		]);
 	}
 
-	x() {
+	x(value = null) {
+		if (value)
+			this.mat.set(0, 0, value);
+
 		return this.mat.at(0, 0);
 	}
-	y() {
+	y(value = null) {
+		if (value)
+			this.mat.set(1, 0, value);
+
 		return this.mat.at(1, 0);
 	}
-	z() {
+	z(value = null) {
+		if (value)
+			this.mat.set(2, 0, value);
+
 		return this.mat.at(2, 0);
 	}
 
@@ -115,6 +124,16 @@ export class GameObject {
 		this.vertices = vertices;
 		this.edges = edges;
 		this.rot = new Point(0, 0, 0);
+	}
+
+	x(value = null) {
+		return this.pos.x(value);
+	}
+	y(value = null) {
+		return this.pos.y(value);
+	}
+	z(value = null) {
+		return this.pos.z(value);
 	}
 
 	rotate(x, y, z) {
