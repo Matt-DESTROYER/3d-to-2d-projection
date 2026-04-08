@@ -172,7 +172,7 @@ export class GameObject {
 		return this;
 	}
 
-	render(ctx, camera, fov = 90) {
+	render(ctx, camera) {
 		if (!(ctx instanceof CanvasRenderingContext2D)) {
 			throw new TypeError("Expected argument `ctx` to be of type `CanvasRenderingContext2D`");
 		}
@@ -205,10 +205,10 @@ export class GameObject {
 				continue;
 			}
 
-			let screen_x_from = (from_pos.x() / from_pos.z()) * fov + cx;
-			let screen_y_from = (from_pos.y() / from_pos.z()) * fov + cy;
-			let screen_x_to = (to_pos.x() / to_pos.z()) * fov + cx;
-			let screen_y_to = (to_pos.y() / to_pos.z()) * fov + cy;
+			let screen_x_from = (from_pos.x() / from_pos.z()) * camera.fov + cx;
+			let screen_y_from = (from_pos.y() / from_pos.z()) * camera.fov + cy;
+			let screen_x_to = (to_pos.x() / to_pos.z()) * camera.fov + cx;
+			let screen_y_to = (to_pos.y() / to_pos.z()) * camera.fov + cy;
 
 			ctx.moveTo(screen_x_from, screen_y_from);
 			ctx.lineTo(screen_x_to, screen_y_to);

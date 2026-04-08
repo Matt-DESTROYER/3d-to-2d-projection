@@ -1,4 +1,5 @@
 import { Point, GameObject } from "./game-object.mjs"
+import { Camera } from "./camera.mjs"
 import { wavefront_to_gameobject } from "./wavefront-object.mjs"
 
 const canvas = document.createElement("canvas");
@@ -177,7 +178,7 @@ async function main() {
 		}
 	});
 
-	const camera = new GameObject(new Point(0, 0, 0), [], []);
+	const camera = new Camera(new Point(0, 0, 0), FOV);
 	const gameobjects = [];
 
 	const cube = new GameObject(new Point(0, 0, 5), [
