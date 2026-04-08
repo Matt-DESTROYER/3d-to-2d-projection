@@ -58,7 +58,8 @@ class Game {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
 		const fov_radians = FOV * (Math.PI / 180);
-		const focal_length = (Math.min(canvas_height, canvas.width) / 2) / Math.tan(fov_radians / 2);
+		const half_lens = Math.min(this.ctx.canvas.height, this.ctx.canvas.width) / 2;
+		const focal_length = half_lens / Math.tan(fov_radians / 2);
 
 		for (const gameobject of this.gameobjects) {
 			gameobject.render(this.ctx, this.camera, focal_length);
