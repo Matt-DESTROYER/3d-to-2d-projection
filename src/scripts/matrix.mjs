@@ -14,7 +14,7 @@ export class Matrix {
 			this.rows = rows;
 			this.columns = columns;
 			this.size = this.rows * this.columns;
-			this.values = new Array(size).fill(0);
+			this.values = new Array(this.size).fill(0);
 		}
 	}
 
