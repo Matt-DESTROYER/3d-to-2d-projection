@@ -80,9 +80,9 @@ export class Point {
 		}
 
 		this
-			.rotX(point.rot.z)
-			.rotY(point.rot.y)
-			.rotZ(point.rot.x);
+			.rotX(point.z)
+			.rotY(point.y)
+			.rotZ(point.x);
 
 		return this;
 	}
