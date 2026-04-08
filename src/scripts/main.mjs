@@ -26,10 +26,10 @@ class Game {
 		this.update();
 		this.render();
 
-		window.requestAnimationFrame(this.#loop);
+		window.requestAnimationFrame(() => this.#loop());
 	}
 	start() {
-		window.requestAnimationFrame(this.#loop);
+		window.requestAnimationFrame(() => this.#loop());
 	}
 
 	update() {
