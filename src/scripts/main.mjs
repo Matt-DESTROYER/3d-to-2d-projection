@@ -1,7 +1,6 @@
 import { Point, GameObject } from "./game-object.mjs"
 
 const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
 
 const FOV = 90;
 
@@ -12,7 +11,7 @@ function resize() {
 
 class Game {
 	constructor(input, camera, gameobjects, ctx) {
-		this.previous_frame = null;
+		this.previous_frame = 0;
 
 		this.input = input;
 		this.camera = camera;
@@ -24,7 +23,7 @@ class Game {
 		const current_frame = performance.now();
 		const delta_time = current_frame - this.previous_frame;
 
-		this.update();
+		this.update(delta_time);
 		this.render();
 
 		window.requestAnimationFrame(() => this.#loop());
@@ -33,7 +32,7 @@ class Game {
 		window.requestAnimationFrame(() => this.#loop());
 	}
 
-	update() {
+	update(delta_time) {
 		if (this.input.forward) {
 			this.camera.x(this.camera.x() + 0.5 * delta_time);
 		}
@@ -54,7 +53,7 @@ class Game {
 		}
 	}
 	render() {
-		this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
 		for (const gameobject of gameobjects) {
 			gameobject.render(this.ctx, camera, FOV);
@@ -154,6 +153,8 @@ async function main() {
 		[3, 7]
 	]);
 	gameobjects.push(cube);
+
+	const ctx = canvas.getContext("2d");
 
 	const game = new Game(ctx, input, camera, gameobjects);
 
