@@ -154,6 +154,24 @@ export class GameObject {
 		return this;
 	}
 
+	move(x, y, z) {
+		if (typeof x !== "number") {
+			throw new TypeError("Expected argument `x` to be of type `number`");
+		}
+		if (typeof y !== "number") {
+			throw new TypeError("Expected argument `y` to be of type `number`");
+		}
+		if (typeof z !== "number") {
+			throw new TypeError("Expected argument `z` to be of type `number`");
+		}
+
+		let local_movement = new Point(x, y, z);
+		local_movement.rot(this.rot);
+		this.pos.translate(local_movement);
+
+		return this;
+	}
+
 	render(ctx, camera, fov = 90) {
 		if (!(ctx instanceof CanvasRenderingContext2D)) {
 			throw new TypeError("Expected argument `ctx` to be of type `CanvasRenderingContext2D`");

@@ -36,17 +36,19 @@ class Game {
 
 	update(delta_time) {
 		// input
+		const movement_distance = CAM_SPEED * delta_time;
+
 		if (this.input.move_forward) {
-			this.camera.z(this.camera.z() + CAM_SPEED * delta_time);
+			this.camera.move(0, 0, distance);
 		}
 		if (this.input.move_backward) {
-			this.camera.z(this.camera.z() - CAM_SPEED * delta_time);
+			this.camera.move(0, 0, -distance);
 		}
 		if (this.input.move_right) {
-			this.camera.x(this.camera.x() + CAM_SPEED * delta_time);
+			this.camera.move(distance, 0, 0);
 		}
 		if (this.input.move_left) {
-			this.camera.x(this.camera.x() - CAM_SPEED * delta_time);
+			this.camera.move(-distance, 0, 0);
 		}
 		if (this.input.move_down) {
 			this.camera.y(this.camera.y() + CAM_SPEED * delta_time);
