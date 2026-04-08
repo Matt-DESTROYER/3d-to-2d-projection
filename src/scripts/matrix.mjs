@@ -106,7 +106,7 @@ export class Matrix {
 			this.rows = result.rows;
 			this.columns = result.columns;
 			this.size = result.size;
-			this.values = result.values.splice(0, result.values.length);
+			this.values = result.values;
 			return this;
 		}
 
