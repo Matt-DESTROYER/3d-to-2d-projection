@@ -91,9 +91,9 @@ export class Point {
 		}
 
 		this
-			.rotX(point.z())
+			.rotX(point.x())
 			.rotY(point.y())
-			.rotZ(point.x());
+			.rotZ(point.z());
 
 		return this;
 	}
@@ -155,11 +155,11 @@ export class GameObject {
 
 		ctx.beginPath();
 		for (const [from, to] of this.edges) {
-			let from_pos = transformed_pos.clone();
-			let to_pos = transformed_pos.clone();
+			let from_pos = this.vertices[from].clone();
+			let to_pos = this.vertices[to].clone();
 
 			from_pos.rot(this.rot).translate(this.pos);
-			to_pos.rot(this.rot).transformed_pos(this.pos);
+			to_pos.rot(this.rot).translate(this.pos);
 
 			from_pos.translate(neg_cam_pos).rot(neg_cam_rot);
 			to_pos.translate(neg_cam_pos).rot(neg_cam_rot);
@@ -167,7 +167,7 @@ export class GameObject {
 			let screen_x_from = (from_pos.x() / from_pos.z()) * fov + cx;
 			let screen_y_from = (from_pos.y() / from_pos.z()) * fov + cy;
 			let screen_x_to = (to_pos.x() / to_pos.z()) * fov + cx;
-			let screen_y_to = (to_pos.y() / to_pos.z() * fov + cy);
+			let screen_y_to = (to_pos.y() / to_pos.z()) * fov + cy;
 
 			ctx.moveTo(screen_x_from, screen_y_from);
 			ctx.lineTo(screen_x_to, screen_y_to);
