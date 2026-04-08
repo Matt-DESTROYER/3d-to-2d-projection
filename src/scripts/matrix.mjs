@@ -4,17 +4,17 @@ export class Matrix {
 			this.rows = rows.length;
 			this.columns = rows[0].length;
 			this.size = this.rows * this.columns;
-			this.values = new Array(size).fill(0, 0, size);
+			this.values = new Array(this.size).fill(0);
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.columns; j++) {
-					this.set(i, j, this.values[i][j]);
+					this.set(i, j, rows[i][j]);
 				}
 			}
 		} else {
 			this.rows = rows;
 			this.columns = columns;
-		this.size = this.rows * this.columns;
-			this.values = new Array(size).fill(0, 0, size);
+			this.size = this.rows * this.columns;
+			this.values = new Array(size).fill(0);
 		}
 	}
 
@@ -35,10 +35,10 @@ export class Matrix {
 
 	add(other) {
 		if (typeof other === "number") {
-			for (let i = 0; i < size; i++) {
+			for (let i = 0; i < this.size; i++) {
 				this.values[i] += other;
 			}
-			return self;
+			return this;
 		}
 
 		if (other instanceof Matrix) {
@@ -51,7 +51,7 @@ export class Matrix {
 					this.set(i, j, this.at(i, j) + other.at(i, j));
 				}
 			}
-			return self;
+			return this;
 		}
 
 		throw new TypeError("Unsupported type!");
@@ -59,9 +59,9 @@ export class Matrix {
 	subtract(other) {
 		if (typeof other === "number") {
 			for (let i = 0; i < size; i++) {
-				this.values[i] += other;
+				this.values[i] -= other;
 			}
-			return self;
+			return this;
 		}
 
 		if (other instanceof Matrix) {
@@ -74,7 +74,7 @@ export class Matrix {
 					this.set(i, j, this.at(i, j) - other.at(i, j));
 				}
 			}
-			return self;
+			return this;
 		}
 
 		throw new TypeError("Unsupported type!");
@@ -84,7 +84,7 @@ export class Matrix {
 			for (let i = 0; i < size; i++) {
 				this.values[i] *= other;
 			}
-			return self;
+			return this;
 		}
 
 		if (other instanceof Matrix) {
@@ -92,12 +92,12 @@ export class Matrix {
 				throw new Error("These matrices' shapes are not able to be multiplied");
 			}
 
-			let result = new Matrix(this.rows, this.columns);
+			let result = new Matrix(this.rows, other.columns);
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < other.columns; j++) {
 					let accum = 0;
-					for (let k = 0; k < other.rows; k++) {
-						accum += this.at(i, j) * other.at(j, i);
+					for (let k = 0; k < this.columns; k++) {
+						accum += this.at(i, k) * other.at(k, j);
 					}
 					result.set(i, j, accum);
 				}
@@ -107,7 +107,7 @@ export class Matrix {
 			this.columns = result.columns;
 			this.size = result.size;
 			this.values = result.values.splice(0, result.values.length);
-			return self;
+			return this;
 		}
 
 		throw new TypeError("Unsupported type!");

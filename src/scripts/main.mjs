@@ -7,8 +7,8 @@ const ctx = canvas.getContext("2d");
 const camera = new Matrix(3, 1);
 
 function resize() {
-	canvas.width = document.body.width;
-	canvas.height = document.body.height;
+	canvas.width = window.width;
+	canvas.height = window.height;
 }
 
 //function update() {}
@@ -32,12 +32,8 @@ function main() {
 	window.requestAnimationFrame(game_loop);
 }
 
-if (document.readyState === "complete") {
+if (document.readyState === "loading") {
 	main();
 } else {
-	document.addEventListener("readystatechange", (event) => {
-		if (event.readyState === "complete") {
-			main();
-		}
-	});
+	document.addEventListener("DOMContentLoaded", main, { once: true });
 }
