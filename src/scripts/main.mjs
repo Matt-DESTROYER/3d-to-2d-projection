@@ -3,7 +3,7 @@ import { Point, GameObject } from "./game-object.mjs"
 const canvas = document.createElement("canvas");
 
 const FOV = 90;
-const CAM_SPEED = 2;
+const CAM_SPEED = 0.5;
 
 function resize() {
 	canvas.width = window.innerWidth;
