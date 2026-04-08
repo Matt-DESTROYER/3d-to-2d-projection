@@ -25,14 +25,14 @@ export class Point {
 		this.mat.set(1, 0, this.mat.at(1, 0) + point.mat.at(1, 0));
 		this.mat.set(2, 0, this.mat.at(2, 0) + point.mat.at(2, 0));
 
-		return self;
+		return this;
 	}
 	negate() {
 		this.mat.set(0, 0, -this.mat.at(0, 0));
 		this.mat.set(1, 0, -this.mat.at(1, 0));
 		this.mat.set(2, 0, -this.mat.at(2, 0));
 
-		return self;
+		return this;
 	}
 
 	rotX(angle) {
@@ -40,51 +40,51 @@ export class Point {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat.multiply(new Matrix(3, 1, [
+		this.mat = new Matrix(3, 1, [
 			[ 1,               0,                0 ],
 			[ 0, Math.cos(angle), -Math.sin(angle) ],
 			[ 0, Math.sin(angle),  Math.cos(angle) ]
-		]));
+		]).multiply(this.mat);
 
-		return self;
+		return this;
 	}
 	rotY(angle) {
 		if (typeof angle !== "number") {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat.multiply(new Matrix(3, 1, [
+		this.mat = new Matrix(3, 1, [
 			[ Math.cos(angle), 0, -Math.sin(angle) ],
 			[               0, 1,                0 ],
 			[ Math.sin(angle), 0,  Math.cos(angle) ]
-		]));
+		]).multiply(this.mat);
 
-		return self;
+		return this;
 	}
 	rotZ(angle) {
 		if (typeof angle !== "number") {
 			throw new TypeError("Expected argument `angle` to be of type `number`");
 		}
 
-		this.mat.multiply(new Matrix(3, 1, [
+		this.mat = new Matrix(3, 1, [
 			[ Math.cos(angle), 0, -Math.sin(angle) ],
 			[ Math.sin(angle), 0,  Math.cos(angle) ],
 			[               0, 0,                1 ]
-		]));
+		]).multiply(this.mat);
 
-		return self;
+		return this;
 	}
 	rot(point) {
 		if (!(point instanceof Point)) {
 			throw new TypeError("Expected argument `point` to be of type `Point`");
 		}
 
-		self
+		this
 			.rotX(point.rot.z)
 			.rotY(point.rot.y)
 			.rotZ(point.rot.x);
 
-		return self;
+		return this;
 	}
 }
 
@@ -121,7 +121,7 @@ export class GameObject {
 		this.rot.y += y;
 		this.rot.z += z;
 
-		return self;
+		return this;
 	}
 
 	render(ctx, camera) {
