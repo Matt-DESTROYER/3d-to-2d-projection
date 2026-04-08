@@ -198,8 +198,14 @@ export class GameObject {
 			from_pos.rot(this.rot).translate(this.pos);
 			to_pos.rot(this.rot).translate(this.pos);
 
-			from_pos.translate(neg_cam_pos).rot(neg_cam_rot);
-			to_pos.translate(neg_cam_pos).rot(neg_cam_rot);
+			from_pos.translate(neg_cam_pos)
+				.rotZ(neg_cam_rot.z())
+				.rotY(neg_cam_rot.y())
+				.rotX(neg_cam_rot.x());
+			to_pos.translate(neg_cam_pos)
+				.rotZ(neg_cam_rot.z())
+				.rotY(neg_cam_rot.y())
+				.rotX(neg_cam_rot.x());
 
 			if (from_pos.z() <= 0 || to_pos.z() <= 0) {
 				continue;
