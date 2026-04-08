@@ -3,7 +3,7 @@ import { Point, GameObject } from "./game-object.mjs"
 const canvas = document.createElement("canvas");
 
 const FOV = 90;
-const CAM_SPEED = 0.5;
+const CAM_SPEED = 2;
 
 function resize() {
 	canvas.width = window.innerWidth;
@@ -27,7 +27,7 @@ class Game {
 		this.update(delta_time);
 		this.render();
 
-		this.previous_frame = performance.now();
+		this.previous_frame = current_frame;
 		window.requestAnimationFrame(() => this.#loop());
 	}
 	start() {
