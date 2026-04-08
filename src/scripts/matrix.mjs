@@ -58,7 +58,7 @@ export class Matrix {
 	}
 	subtract(other) {
 		if (typeof other === "number") {
-			for (let i = 0; i < size; i++) {
+			for (let i = 0; i < this.size; i++) {
 				this.values[i] -= other;
 			}
 			return this;
@@ -81,7 +81,7 @@ export class Matrix {
 	}
 	multiply(other) {
 		if (typeof other === "number") {
-			for (let i = 0; i < size; i++) {
+			for (let i = 0; i < this.size; i++) {
 				this.values[i] *= other;
 			}
 			return this;
