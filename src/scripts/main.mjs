@@ -55,6 +55,19 @@ class Game {
 			this.camera.y(this.camera.y() - CAM_SPEED * delta_time);
 		}
 
+		if (this.rotate_up) {
+			this.camera.rotate(CAM_SPEED * delta_time, 0);
+		}
+		if (this.rotate_down) {
+			this.camera.rotate(-CAM_SPEED * delta_time, 0);
+		}
+		if (this.rotate_left) {
+			this.camera.rotate(0, CAM_SPEED * delta_time, 0);
+		}
+		if (this.rotate_right) {
+			this.camera.rotate(0, -CAM_SPEED * delta_time, 0);
+		}
+
 		// rotate cube
 		this.gameobjects[0].rotate(0, delta_time, 0);
 	}
@@ -77,58 +90,86 @@ async function main() {
 	document.body.appendChild(canvas);
 
 	const input = Object.seal({
-		forward: false,
-		backward: false,
-		left: false,
-		right: false,
-		up: false,
-		down: false
+		move_forward: false,
+		move_backward: false,
+		move_left: false,
+		move_right: false,
+		move_up: false,
+		move_down: false,
+		rotate_left: false,
+		rotate_right: false,
+		rotate_up: false,
+		rotate_down: false
 	});
 	window.addEventListener("keydown", (event) => {
 		switch (event.code) {
 			case "KeyW":
-				input.forward = true;
+				input.move_forward = true;
 				break;
 			case "KeyS":
-				input.backward = true;
+				input.move_backward = true;
 				break;
 			case "KeyA":
-				input.left = true;
+				input.move_left = true;
 				break;
 			case "KeyD":
-				input.right = true;
+				input.move_right = true;
 				break;
 			case "KeyE":
 			case "Space":
-				input.up = true;
+				input.move_up = true;
 				break;
 			case "KeyQ":
 			case "ShiftLeft":
-				input.down = true;
+				input.move_down = true;
+				break;
+			case "ArrowUp":
+				input.rotate_up = true;
+				break;
+			case "ArrowDown":
+				input.rotate_down = true;
+				break;
+			case "ArrowLeft":
+				input.rotate_left = true;
+				break;
+			case "ArrowRight":
+				input.rotate_right = true;
 				break;
 		}
 	});
 	window.addEventListener("keyup", (event) => {
 		switch (event.code) {
 			case "KeyW":
-				input.forward = false;
+				input.move_forward = false;
 				break;
 			case "KeyS":
-				input.backward = false;
+				input.move_backward = false;
 				break;
 			case "KeyA":
-				input.left = false;
+				input.move_left = false;
 				break;
 			case "KeyD":
-				input.right = false;
+				input.move_right = false;
 				break;
 			case "KeyE":
 			case "Space":
-				input.up = false;
+				input.move_up = false;
 				break;
 			case "KeyQ":
 			case "ShiftLeft":
-				input.down = false;
+				input.move_down = false;
+				break;
+			case "ArrowUp":
+				input.rotate_up = false;
+				break;
+			case "ArrowDown":
+				input.rotate_down = false;
+				break;
+			case "ArrowLeft":
+				input.rotate_left = false;
+				break;
+			case "ArrowRight":
+				input.rotate_right = false;
 				break;
 		}
 	});
