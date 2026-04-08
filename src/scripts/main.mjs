@@ -3,6 +3,8 @@ import { Point, GameObject } from "./game-object.mjs"
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
+const FOV = 90;
+
 function resize() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -14,13 +16,13 @@ function render(ctx, gameobjects) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	for (const gameobject of gameobjects) {
-		gameobject.render(ctx);
+		gameobject.render(ctx, camera);
 	}
 }
 
 function game_loop(camera, gameobjects) {
 	//update();
-	render(ctx, gameobjects);
+	render(ctx, gameobjects, FOV);
 
 	window.requestAnimationFrame(() => game_loop(camera, gameobjects));
 }
