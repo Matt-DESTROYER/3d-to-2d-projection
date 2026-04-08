@@ -11,12 +11,13 @@ function resize() {
 }
 
 class Game {
-	constructor(input, camera, gameobjects) {
+	constructor(input, camera, gameobjects, ctx) {
 		this.previous_frame = null;
 
 		this.input = input;
 		this.camera = camera;
 		this.gameobjects = gameobjects;
+		this.ctx = ctx;
 	}
 
 	#loop() {
@@ -52,11 +53,11 @@ class Game {
 			this.camera.y(this.camera.y() - 0.5 * delta_time);
 		}
 	}
-	render(ctx) {
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	render() {
+		this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		for (const gameobject of gameobjects) {
-			gameobject.render(ctx, camera, FOV);
+			gameobject.render(this.ctx, camera, FOV);
 		}
 	}
 }
@@ -154,7 +155,7 @@ async function main() {
 	]);
 	gameobjects.push(cube);
 
-	const game = new Game(input, camera, gameobjects);
+	const game = new Game(ctx, input, camera, gameobjects);
 
 	game.start();
 }
